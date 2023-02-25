@@ -14,17 +14,29 @@ public class DriverController {
 	DriverService driverService;
 	@PostMapping(value = "/register")
 	public ResponseEntity<Void> registerDriver(@RequestParam String mobile, @RequestParam String password){
-		driverService.register(mobile,password);
+		try{
+			driverService.register(mobile,password);
+		}catch (Exception e){
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@DeleteMapping(value = "/delete")
 	public void deleteDriver(@RequestParam Integer driverId){
-		driverService.removeDriver(driverId);
+		try{
+			driverService.removeDriver(driverId);
+		}catch (Exception e){
+			return;
+		}
 	}
 
 	@PutMapping("/status")
 	public void updateStatus(@RequestParam Integer driverId){
-		driverService.updateStatus(driverId);
+		try{
+			driverService.updateStatus(driverId);
+		}catch (Exception e){
+			return;
+		}
 	}
 }

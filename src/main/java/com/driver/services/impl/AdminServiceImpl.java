@@ -28,13 +28,13 @@ public class AdminServiceImpl implements AdminService {
 	CustomerRepository customerRepository1;
 
 	@Override
-	public void adminRegister(Admin admin) {
+	public void adminRegister(Admin admin) throws Exception{
 		//Save the admin in the database
 		adminRepository1.save(admin);
 	}
 
 	@Override
-	public Admin updatePassword(Integer adminId, String password) {
+	public Admin updatePassword(Integer adminId, String password) throws Exception{
 		//Update the password of admin with given id
 		Admin admin = adminRepository1.findById(adminId).get();
 		admin.setPassword(password);
@@ -43,14 +43,14 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void deleteAdmin(int adminId){
+	public void deleteAdmin(int adminId) throws Exception{
 		// Delete admin without using deleteById function
 		Admin admin = adminRepository1.findById(adminId).get();
 		adminRepository1.delete(admin);
 	}
 
 	@Override
-	public List<Driver> getListOfDrivers() {
+	public List<Driver> getListOfDrivers() throws Exception{
 		//Find the list of all drivers
 		List<Driver> driverList = new ArrayList<>();
 		driverList = driverRepository1.findAll();
@@ -58,7 +58,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Customer> getListOfCustomers() {
+	public List<Customer> getListOfCustomers() throws Exception{
 		//Find the list of all customers
 		List<Customer> customerList = new ArrayList<>();
 		customerList = customerRepository1.findAll();
