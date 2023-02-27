@@ -83,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
 		tripBooking.setStatus(TripStatus.CANCELED);
 		tripBooking.setBill(0);
 		tripBooking.getDriver().getCab().setAvailable(Boolean.TRUE);
-		tripBookingRepository2.save(tripBooking);
+		tripBookingRepository2.save(tripBooking);// only we have to save the child , because the change is happening only in the trip booking attributes.
 	}
 
 	@Override
@@ -91,10 +91,9 @@ public class CustomerServiceImpl implements CustomerService {
 		//Complete the trip having given trip Id and update TripBooking attributes accordingly
 		TripBooking tripBooking = tripBookingRepository2.findById(tripId).get();
 		tripBooking.setStatus(TripStatus.COMPLETED);
-		Customer customer = tripBooking.getCustomer();
-		Driver driver = tripBooking.getDriver();
-
-		customerRepository2.save(customer);
-		driverRepository2.save(driver);
+		int bill = tripBooking.getBill();
+		tripBooking.setBill(bill);
+		tripBooking.getDriver().getCab().setAvailable(Boolean.FALSE);
+		tripBookingRepository2.save(tripBooking);
 	}
 }
