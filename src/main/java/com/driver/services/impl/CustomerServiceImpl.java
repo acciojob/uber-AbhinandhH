@@ -1,16 +1,13 @@
 package com.driver.services.impl;
 
-import com.driver.model.TripBooking;
+import com.driver.model.*;
 import com.driver.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.driver.model.Customer;
-import com.driver.model.Driver;
 import com.driver.repository.CustomerRepository;
 import com.driver.repository.DriverRepository;
 import com.driver.repository.TripBookingRepository;
-import com.driver.model.TripStatus;
 
 import java.util.List;
 
@@ -58,6 +55,8 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		int ratePerKm = driverAvailable.getCab().getPerKmRate();
 		int totalBill = ratePerKm * distanceInKm;
+		Cab cab = driverAvailable.getCab();
+		cab.setAvailable(false);
 		newTrip.setBill(totalBill);
 		newTrip.setDistanceInKm(distanceInKm);
 		newTrip.setCustomer(customer);
