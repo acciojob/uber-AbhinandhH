@@ -14,7 +14,7 @@ public class CustomerController {
 	@Autowired
 	CustomerService customerService;
 	@PostMapping("/register")
-	public ResponseEntity<Void> registerCustomer(@RequestBody Customer customer){
+	public ResponseEntity<Void> registerCustomer(@RequestBody Customer customer) {
 		try{
 			customerService.register(customer);
 		}catch (Exception e){
@@ -24,7 +24,7 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/delete")
-	public void deleteCustomer(@RequestParam Integer customerId){
+	public void deleteCustomer(@RequestParam Integer customerId) {
 		try{
 			customerService.deleteCustomer(customerId);
 		}catch (Exception e){
@@ -38,26 +38,18 @@ public class CustomerController {
 		try{
 			bookedTrip = customerService.bookTrip(customerId,fromLocation,toLocation,distanceInKm);
 		}catch (Exception e){
-			return new ResponseEntity<>(-1, HttpStatus.BAD_REQUEST);
+			throw new Exception("No cab available!");
 		}
 		return new ResponseEntity<>(bookedTrip.getTripBookingId(), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/complete")
-	public void completeTrip(@RequestParam Integer tripId){
-		try{
-			customerService.completeTrip(tripId);
-		}catch (Exception e){
-			return;
-		}
+	public void completeTrip(@RequestParam Integer tripId) {
+		customerService.completeTrip(tripId);
 	}
 
 	@DeleteMapping("/cancelTrip")
-	public void cancelTrip(@RequestParam Integer tripId){
-		try{
-			customerService.cancelTrip(tripId);
-		}catch (Exception e){
-			return;
-		}
+	public void cancelTrip(@RequestParam Integer tripId) {
+		customerService.cancelTrip(tripId);
 	}
 }

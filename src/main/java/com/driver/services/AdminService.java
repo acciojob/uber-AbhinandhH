@@ -8,13 +8,13 @@ import com.driver.model.Driver;
 
 public interface AdminService {
 
-	public void adminRegister(Admin admin) throws Exception;
+	public void adminRegister(Admin admin);
 
-	public Admin updatePassword(Integer adminId, String password) throws Exception;
+	public Admin updatePassword(Integer adminId, String password) ;
 
-	public void deleteAdmin(int adminId) throws Exception;
+	public void deleteAdmin(int adminId) ;
 
-	public List<Driver> getListOfDrivers() throws Exception;
+	public List<Driver> getListOfDrivers() ;
 	
-	public List<Customer> getListOfCustomers() throws Exception;
+	public List<Customer> getListOfCustomers() ;
 }
