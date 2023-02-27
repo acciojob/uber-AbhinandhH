@@ -15,21 +15,13 @@ public class CustomerController {
 	CustomerService customerService;
 	@PostMapping("/register")
 	public ResponseEntity<Void> registerCustomer(@RequestBody Customer customer) {
-		try{
-			customerService.register(customer);
-		}catch (Exception e){
-			return  new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
+		customerService.register(customer);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@DeleteMapping("/delete")
 	public void deleteCustomer(@RequestParam Integer customerId) {
-		try{
-			customerService.deleteCustomer(customerId);
-		}catch (Exception e){
-			return;
-		}
+		customerService.deleteCustomer(customerId);
 	}
 
 	@PostMapping("/bookTrip")
